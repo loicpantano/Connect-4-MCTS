@@ -7,10 +7,11 @@
 
 class Game
 {
-private:
-	Board board;
+public:
+    Board board;
 	std::array<std::unique_ptr<Player>, 2> players;
 	int status;
+    int turn;
 
 public:
 	Game(char p1, char p2);

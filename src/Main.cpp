@@ -6,12 +6,13 @@
 
 int main()
 {
+    /*
 	char p1, p2;
 	std::cout << "Enter the type of player 1 (h for human, c for computer): " << std::endl;
 	std::cin >> p1;
 	std::cout << "Enter the type of player 2 (h for human, c for computer): " << std::endl;
 	std::cin >> p2;
-
-	Game game = Game(p1, p2);
+*/
+	Game game = Game('h', 'h');
 	game.start();
 }

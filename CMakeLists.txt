@@ -21,7 +21,7 @@ endif ()
 file(GLOB_RECURSE SOURCES src/*.cpp)
 file(GLOB_RECURSE HEADERS include/*.hpp src/*.hpp)
 # Executable
-add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS})
+add_executable(${PROJECT_NAME} ${SOURCES} ${HEADERS} src/engine/Engine.cpp include/engine/Engine.hpp)
 
 if (SFML_FOUND)
     include_directories(${SFML_INCLUDE_DIR} include)
