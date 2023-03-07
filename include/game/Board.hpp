@@ -18,6 +18,7 @@ public:
 	void reset();
 	bool isFull() const;
 	bool checkWin();
+    bool isTerminal();
 	friend std::ostream& operator<<(std::ostream& os, const Board& obj);
 };
 

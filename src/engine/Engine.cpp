@@ -50,6 +50,9 @@ void Engine::run(){
                     if(legal) game->turn ++;
                 }
             }
+        } else{
+            game->players[game->turn % 2]->play(&game->board);
+            game->turn ++;
         }
     }
 }
@@ -99,7 +102,9 @@ void Engine::printWinner(int i) {
     window.draw(rectangle);
 
     std::string winner;
-    if(i == 0){
+    if(i == -1){
+        winner = "Draw";
+    }else if(i == 1){
         winner = "Player 1 wins";
     }else{
         winner = "Player 2 wins";
@@ -119,9 +124,9 @@ void Engine::printWinner(int i) {
     window.display();
     bool x = true;
     while (x){
-        sf::Event event;
+        sf::Event event{};
         while (window.pollEvent(event)) {
-            if (event.type == sf::Event::EventType::KeyPressed) {
+            if (event.type == sf::Event::EventType::KeyPressed || event.type == sf::Event::EventType::MouseButtonPressed) {
                 x = false;
             }
         }

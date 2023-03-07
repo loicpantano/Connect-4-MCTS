@@ -3,13 +3,16 @@
 #include <memory>
 
 #include "../../include/bot/Human.hpp"
+#include "bot/Bot.hpp"
 
 
 std::unique_ptr<Player> PlayerFactory::createPlayer(char type, Color color)
 {
 	switch (type)
 	{
-	default/*Human*/:
-		return std::make_unique<Human>(color);
+        case 'b':
+            return std::make_unique<Bot>(color);
+        default/*Human*/:
+            return std::make_unique<Human>(color);
 	}
 }

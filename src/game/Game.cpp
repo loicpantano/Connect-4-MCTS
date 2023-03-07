@@ -25,7 +25,15 @@ void Game::start()
         engine.refresh();
         if(board.checkWin())
         {
+            engine.linkBoard();
+            engine.refresh();
             engine.printWinner(turn%2);
+            status = 0;
+        }else if(board.isFull())
+        {
+            engine.linkBoard();
+            engine.refresh();
+            engine.printWinner(-1);
             status = 0;
         }
     }

@@ -100,3 +100,7 @@ std::ostream& operator<<(std::ostream& os, const Board& obj)
 
 	return os;
 }
+
+bool Board::isTerminal() {
+    return isFull() || checkWin();
+}
