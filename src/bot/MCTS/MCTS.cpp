@@ -5,15 +5,16 @@
 #include "bot/MCTS/MCTS.hpp"
 #include <queue>
 #include <iostream>
+#include <chrono>
 
 MCTS::MCTS(Board board, Color color){
     root = TreeNode(GameState(board, color));
 }
 
 void MCTS::run() {
-    std::cout << "expanded" << std::endl;
-    int i = 0;
-    while (!this->root.isFull() && root.depth() < 11) {
+    int numSimulations = 10000;
+    int numIterations = 0;
+    while (numIterations < numSimulations) {
         TreeNode *current_node = &root;
 
         while (!current_node->children.empty()) {
@@ -21,15 +22,31 @@ void MCTS::run() {
         }
 
         current_node->expand();
-        std::cout << root.depth() << std::endl;
-        printTree();
-        i++;
+        if(!current_node->children.empty()) {
+            current_node = current_node->getBestChild();
+        }
+
+
+        int reward;
+        for(int i = 0; i < 100; i++) {
+            reward = current_node->simulate();
+            current_node->backpropagate(reward);
+        }
+        //printTree();
+        numIterations++;
     }
+    std::cout << "MCTS completed " << numIterations << " iterations." << std::endl;
 }
 
+
 int MCTS::getMove() {
-    TreeNode * best_child = root.getBestChild();
-    return best_child->getMove();
+    TreeNode *best_child = root.children.at(0);
+    for(TreeNode* child : root.children){
+        if(child->score > best_child->score){
+            best_child = child;
+        }
+    }
+    return best_child->move;
 }
 
 void MCTS::printTree() {

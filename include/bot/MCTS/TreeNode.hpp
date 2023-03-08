@@ -15,9 +15,13 @@ public:
     GameState gameState;
     std::vector<TreeNode*> children;
     int move;
+    int visits = 1;
+    int score = 0;
+    TreeNode * parent = nullptr;
     explicit TreeNode(GameState gameState);
-    TreeNode(GameState gameState, int move);
+    TreeNode(GameState gameState, int move, TreeNode * parent);
     TreeNode();
+
 
     TreeNode * getBestChild();
     int getSimulations();
@@ -32,6 +36,9 @@ public:
     int getMove() const;
     void printTree();
     int depth();
+    void backpropagate(double reward);
+
+    int simulate();
 };
 
 

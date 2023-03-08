@@ -10,7 +10,7 @@ TreeNode::TreeNode(GameState gameState): gameState(gameState),move(-1) {
 
 }
 
-TreeNode::TreeNode(GameState gameState, int move): gameState(gameState),move(move) {
+TreeNode::TreeNode(GameState gameState, int move,TreeNode * parent): gameState(gameState),move(move),parent(parent) {
 
 }
 
@@ -23,36 +23,26 @@ bool TreeNode::isLeaf() {
     return gameState.isTerminal();
 }
 
-TreeNode * TreeNode::getBestChild() {
-    int best_child = 0;
-    double best_uct = std::numeric_limits<double>::lowest();
+TreeNode* TreeNode::getBestChild() {
+    double maxScore = -std::numeric_limits<double>::infinity();
+    TreeNode* bestChild = nullptr;
 
-    for(int i = 0; i < children.size(); i++) {
-        double uct = children[i]->getUCT();
-        if(children[i]->isFull()) uct = -100;
-        if(gameState.playerColor == gameState.turnColor) {
-            if (uct > best_uct) {
-                best_uct = uct;
-                best_child = i;
-            }
-        } else {
-            if (uct < best_uct) {
-                best_uct = uct;
-                best_child = i;
-            }
+    for (TreeNode* child : children) {
+        double ucb1Score = child->getUCT();
+        if (ucb1Score > maxScore) {
+            maxScore = ucb1Score;
+            bestChild = child;
         }
     }
-    return children[best_child];
+
+    return bestChild;
 }
 
 double TreeNode::getUCT() {
-    double c = 1.41;
-    TreeNode* child_node = this;
-    double w_i = child_node->getReward();
-    double n_i = child_node->getSimulations();
-    double N = this->getSimulations();
-
-    return (w_i / n_i) + c * sqrt(log(N) / n_i);
+    if (visits == 0) {
+        return std::numeric_limits<double>::infinity();
+    }
+    return (double) score / visits + 1.41 * sqrt(log(parent->visits) / visits);
 }
 
 
@@ -96,7 +86,7 @@ void TreeNode::expand() {
         GameState new_state = gameState.makeMove(mv);
 
         // Create a new node for the new game state
-        auto* new_node = new TreeNode(new_state,mv);
+        auto* new_node = new TreeNode(new_state,mv, this);
 
         // Add the new node as a child of this node
         children.push_back(new_node);
@@ -143,4 +133,33 @@ int TreeNode::depth() {
         }
     }
     return maxDepth + 1;
+}
+
+void TreeNode::backpropagate(double value) {
+    visits++;
+    score += value;
+
+    if (parent != nullptr) {
+        parent->backpropagate(value);
+    }
+}
+
+int TreeNode::simulate() {
+    GameState gameStateCopy = gameState;
+
+    // Randomly play out the game from the current state until a terminal state is reached
+    while (!gameStateCopy.isTerminal()) {
+        std::vector<int> availableMoves = gameStateCopy.getLegalMoves();
+        int randomMove = availableMoves[rand() % availableMoves.size()];
+        gameStateCopy = gameStateCopy.makeMove(randomMove);
+    }
+
+    // Return the score of the game from the perspective of the player whose turn it is in the current state
+    Color winner = gameStateCopy.board.getWinner();
+    if(winner == gameState.playerColor)
+        return 1;
+    else if(winner == NO)
+        return 0;
+    else
+        return -2;
 }

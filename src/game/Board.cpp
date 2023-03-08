@@ -104,3 +104,19 @@ std::ostream& operator<<(std::ostream& os, const Board& obj)
 bool Board::isTerminal() {
     return isFull() || checkWin();
 }
+
+Color Board::getWinner() {
+    if(checkWin()){
+        int red = 0;
+        int yellow = 0;
+        for( int i = 0; i < width; i++){
+            for(int j = 0; j < height; j++){
+                if(board.at(i).at(j) == RED) red++;
+                if(board.at(i).at(j) == YELLOW) yellow++;
+            }
+        }
+        if(red > yellow) return RED;
+        else return YELLOW;
+    }
+    return NO;
+}

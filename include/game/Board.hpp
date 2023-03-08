@@ -19,6 +19,7 @@ public:
 	bool isFull() const;
 	bool checkWin();
     bool isTerminal();
+    Color getWinner();
 	friend std::ostream& operator<<(std::ostream& os, const Board& obj);
 };
 
