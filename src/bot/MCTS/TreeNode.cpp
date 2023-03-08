@@ -5,12 +5,13 @@
 #include <cmath>
 #include <iostream>
 #include "bot/MCTS/TreeNode.hpp"
+
 //Constructors
-TreeNode::TreeNode(GameState gameState): gameState(gameState),move(-1) {
+TreeNode::TreeNode(GameState gameState) : gameState(gameState), move(-1) {
 
 }
 
-TreeNode::TreeNode(GameState gameState, int move,TreeNode * parent): gameState(gameState),move(move),parent(parent) {
+TreeNode::TreeNode(GameState gameState, int move, TreeNode *parent) : gameState(gameState), move(move), parent(parent) {
 
 }
 
@@ -29,10 +30,10 @@ double TreeNode::getUCT() const {
 void TreeNode::expand() {
 
     std::vector<int> legal_moves = gameState.getLegalMoves();
-    for (int mv : legal_moves) {
+    for (int mv: legal_moves) {
         GameState new_state = gameState.makeMove(mv);
 
-        auto* new_node = new TreeNode(new_state,mv, this);
+        auto *new_node = new TreeNode(new_state, mv, this);
 
         children.push_back(new_node);
     }
@@ -48,9 +49,9 @@ int TreeNode::simulate() {
     }
 
     Color winner = gameStateCopy.getWinner();
-    if(winner == gameState.getPlayerColor())
+    if (winner == gameState.getPlayerColor())
         return 1;
-    else if(winner == NO)
+    else if (winner == NO)
         return 0;
     else
         return -2;
@@ -65,11 +66,11 @@ void TreeNode::backpropagate(double value) {
     }
 }
 
-TreeNode* TreeNode::getBestChild()  const{
+TreeNode *TreeNode::getBestChild() const {
     double maxScore = -std::numeric_limits<double>::infinity();
-    TreeNode* bestChild = nullptr;
+    TreeNode *bestChild = nullptr;
 
-    for (TreeNode* child : children) {
+    for (TreeNode *child: children) {
         double ucb1Score = child->getUCT();
         if (ucb1Score > maxScore) {
             maxScore = ucb1Score;
@@ -82,7 +83,7 @@ TreeNode* TreeNode::getBestChild()  const{
 
 //Getters
 
-std::vector<TreeNode*> TreeNode::getChildren() const {
+std::vector<TreeNode *> TreeNode::getChildren() const {
     return children;
 }
 

@@ -4,7 +4,6 @@
 Human::Human(Color color) : Player(color) {}
 
 
-void Human::play(Board * board)
-{
+void Human::play(Board *board) {
 }
 

@@ -17,23 +17,30 @@ private:
     int visits = 1;
     int score = 0;
 
-    TreeNode * parent = nullptr;
-    std::vector<TreeNode*> children;
+    TreeNode *parent = nullptr;
+    std::vector<TreeNode *> children;
 
-    TreeNode(GameState gameState, int move, TreeNode * parent);
+    TreeNode(GameState gameState, int move, TreeNode *parent);
+
     double getUCT() const;
 
 public:
     TreeNode();
+
     explicit TreeNode(GameState gameState);
 
     void expand();
-    int simulate();
-    void backpropagate(double reward);
-    TreeNode * getBestChild() const;
 
-    std::vector<TreeNode*> getChildren() const;
+    int simulate();
+
+    void backpropagate(double reward);
+
+    TreeNode *getBestChild() const;
+
+    std::vector<TreeNode *> getChildren() const;
+
     int getMove() const;
+
     int getScore() const;
 };
 

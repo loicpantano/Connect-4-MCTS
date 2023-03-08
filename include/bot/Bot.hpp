@@ -10,11 +10,12 @@
 #include "game/Board.hpp"
 #include "Player.hpp"
 
-class Bot:
-        public Player{
+class Bot :
+        public Player {
 public:
     explicit Bot(Color color);
-    void play(Board * board) override;
+
+    void play(Board *board) override;
 
 };
 

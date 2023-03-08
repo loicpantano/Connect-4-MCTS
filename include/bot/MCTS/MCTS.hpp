@@ -13,7 +13,9 @@ private:
     TreeNode root;
 public:
     explicit MCTS(Board board, Color color);
+
     void run();
+
     int getMove() const;
 };
 

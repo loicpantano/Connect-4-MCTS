@@ -5,7 +5,7 @@
 #include "bot/Bot.hpp"
 #include "bot/MCTS/MCTS.hpp"
 
-void Bot::play(Board * board) {
+void Bot::play(Board *board) {
     MCTS mcts(*board, this->getColor());
     mcts.run();
     int move = mcts.getMove();

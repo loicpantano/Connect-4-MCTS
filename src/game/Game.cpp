@@ -6,31 +6,27 @@
 #include <SFML/Graphics.hpp>
 
 
-Game::Game(char p1, char p2): board(Board()), status(0), turn(0)
-{
-	players[0] = PlayerFactory::createPlayer(p1, RED);
-	players[1] = PlayerFactory::createPlayer(p2, YELLOW);
+Game::Game(char p1, char p2) : board(Board()), status(0), turn(0) {
+    players[0] = PlayerFactory::createPlayer(p1, RED);
+    players[1] = PlayerFactory::createPlayer(p2, YELLOW);
 }
 
-void Game::start()
-{
+void Game::start() {
     Engine engine = Engine(this);
     status = 1;
-	board.reset();
+    board.reset();
 
-    while(status == 1) {
+    while (status == 1) {
         engine.run();
         engine.linkBoard();
         engine.hover();
         engine.refresh();
-        if(board.checkWin())
-        {
+        if (board.checkWin()) {
             engine.linkBoard();
             engine.refresh();
-            engine.printWinner(turn%2);
+            engine.printWinner(turn % 2);
             status = 0;
-        }else if(board.isFull())
-        {
+        } else if (board.isFull()) {
             engine.linkBoard();
             engine.refresh();
             engine.printWinner(-1);

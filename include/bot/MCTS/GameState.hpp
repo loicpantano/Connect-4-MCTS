@@ -19,12 +19,16 @@ private:
 
 public:
     GameState();
+
     explicit GameState(Board board, Color color);
 
 
     bool isTerminal() const;
+
     Color getWinner() const;
+
     std::vector<int> getLegalMoves() const;
+
     GameState makeMove(int move) const;
 
     Color getPlayerColor() const;

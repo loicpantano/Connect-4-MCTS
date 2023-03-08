@@ -7,15 +7,16 @@
 
 //Constructors
 
-GameState::GameState(Board board, Color color): board(board), playerColor(color), turnColor(color) {}
+GameState::GameState(Board board, Color color) : board(board), playerColor(color), turnColor(color) {}
 
 GameState::GameState() {}
 
-GameState::GameState(Board board, Color color, Color turnColor): board(board), playerColor(color), turnColor(turnColor) {}
+GameState::GameState(Board board, Color color, Color turnColor) : board(board), playerColor(color),
+                                                                  turnColor(turnColor) {}
 
 //Functions
 
-bool GameState::isTerminal() const{
+bool GameState::isTerminal() const {
     return board.isTerminal();
 }
 

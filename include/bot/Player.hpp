@@ -1,13 +1,14 @@
 #pragma once
+
 #include "../game/Board.hpp"
 
-class Player 
-{
+class Player {
 private:
-	Color color;
+    Color color;
 public:
-	explicit Player(Color color);
-	virtual void play(Board * board) = 0;
+    explicit Player(Color color);
+
+    virtual void play(Board *board) = 0;
 
     Color getColor() const;
 };

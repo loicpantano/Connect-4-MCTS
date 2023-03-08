@@ -8,13 +8,16 @@
 #include "bot/Human.hpp"
 
 
-Engine::Engine(Game * game) : game(game) {
+Engine::Engine(Game *game) : game(game) {
     this->window.create(sf::VideoMode(580, 500), "Connect 4");
+    sf::Image icon;
+    if (!icon.loadFromFile("../assets/image/c4.jpg")) {
+    }
 
-    for (int i = 0; i < Board::width; i++)
-    {
-        for (int j = 0; j < Board::height; j++)
-        {
+    window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+
+    for (int i = 0; i < Board::width; i++) {
+        for (int j = 0; j < Board::height; j++) {
             boardg[i][j].setRadius(30);
             boardg[i][j].setFillColor((sf::Color(50, 50, 175)));
             boardg[i][j].setPosition(i * 70 + 50, (Board::height - 1 - j) * 70 + 50);
@@ -23,12 +26,12 @@ Engine::Engine(Game * game) : game(game) {
 
 }
 
-void Engine::run(){
+void Engine::run() {
     sf::Event event{};
 
     for (int i = 0; i < Board::width; i++) {
         for (int j = 0; j < Board::height; j++) {
-            if(game->board.board[i][j] == NO)
+            if (game->board.board[i][j] == NO)
                 boardg[i][j].setFillColor(sf::Color(50, 50, 175));
         }
     }
@@ -37,30 +40,30 @@ void Engine::run(){
         if (event.type == sf::Event::Closed) {
             stop();
             game->status = 0;
-        } else if (dynamic_cast<Human*>(game->players[game->turn % 2].get()) != nullptr) {
+        } else if (dynamic_cast<Human *>(game->players[game->turn % 2].get()) != nullptr) {
             if (event.type == sf::Event::MouseButtonPressed) {
-                // Place game piece
                 int x = event.mouseButton.x;
                 int y = event.mouseButton.y;
                 int column = (x - 50) / 70;
                 int row = (y - 50) / 70;
                 if (column >= 0 && column < 7 && row >= 0 && row < 6) {
                     bool legal;
-                    game->turn % 2 == 0 ? legal = game->board.placeJeton(column,RED) : legal = game->board.placeJeton(column,YELLOW);
-                    if(legal) game->turn ++;
+                    game->turn % 2 == 0 ? legal = game->board.placeJeton(column, RED) : legal = game->board.placeJeton(
+                            column, YELLOW);
+                    if (legal) game->turn++;
                 }
             }
-        } else{
+        } else {
             game->players[game->turn % 2]->play(&game->board);
-            game->turn ++;
+            game->turn++;
         }
     }
 }
 
 void Engine::refresh() {
     window.clear((sf::Color(1, 1, 125)));
-    for (auto & i : boardg) {
-        for (const auto & j : i) {
+    for (auto &i: boardg) {
+        for (const auto &j: i) {
             window.draw(j);
         }
     }
@@ -68,30 +71,30 @@ void Engine::refresh() {
 }
 
 void Engine::linkBoard() {
-    for(int i = 0; i < Board::width; i++){
-        for(int j = 0; j < Board::height; j++){
-            if(game->board.board[i][j] == RED){
+    for (int i = 0; i < Board::width; i++) {
+        for (int j = 0; j < Board::height; j++) {
+            if (game->board.board[i][j] == RED) {
                 boardg[i][j].setFillColor(sf::Color::Red);
-            }else if(game->board.board[i][j] == YELLOW){
+            } else if (game->board.board[i][j] == YELLOW) {
                 boardg[i][j].setFillColor(sf::Color::Yellow);
             }
         }
     }
 }
 
-void Engine::hover(){
+void Engine::hover() {
     int x = sf::Mouse::getPosition(window).x;
     int column = (x - 50) / 70;
-    if (column >= 0 && column < 7){
-        for(int i = 0; i < 6; i++){
-            if(game->board.board[column][i] == NO){
-                boardg[column][i].setFillColor(sf::Color(100,100,100));
+    if (column >= 0 && column < 7) {
+        for (int i = 0; i < 6; i++) {
+            if (game->board.board[column][i] == NO) {
+                boardg[column][i].setFillColor(sf::Color(100, 100, 100));
             }
         }
     }
 }
 
-void Engine:: stop(){
+void Engine::stop() {
     window.close();
 }
 
@@ -102,16 +105,15 @@ void Engine::printWinner(int i) {
     window.draw(rectangle);
 
     std::string winner;
-    if(i == -1){
+    if (i == -1) {
         winner = "Draw";
-    }else if(i == 1){
+    } else if (i == 1) {
         winner = "Player 1 wins";
-    }else{
+    } else {
         winner = "Player 2 wins";
     }
     sf::Font font;
-    if (!font.loadFromFile("../assets/font/PIXEAB__.TTF"))
-    {
+    if (!font.loadFromFile("../assets/font/PIXEAB__.TTF")) {
         // error...
     }
     sf::Text text;
@@ -123,10 +125,11 @@ void Engine::printWinner(int i) {
     window.draw(text);
     window.display();
     bool x = true;
-    while (x){
+    while (x) {
         sf::Event event{};
         while (window.pollEvent(event)) {
-            if (event.type == sf::Event::EventType::KeyPressed || event.type == sf::Event::EventType::MouseButtonPressed) {
+            if (event.type == sf::Event::EventType::KeyPressed ||
+                event.type == sf::Event::EventType::MouseButtonPressed) {
                 x = false;
             }
         }
