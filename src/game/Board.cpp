@@ -9,13 +9,7 @@ Board::Board(){
 	reset();
 }
 
-bool Board::isFull() const
-{
-	bool full = true;
-	for (std::array<Color, height> tmp : board)
-		if(tmp.at(height-1) == NO) full = false;
-	return full;
-}
+
 
 bool Board::placeJeton(int column, Color color)
 {
@@ -39,8 +33,15 @@ void Board::reset()
         row.fill(NO);
 }
 
-bool Board::checkWin()
+bool Board::isFull() const
 {
+    bool full = true;
+    for (std::array<Color, height> tmp : board)
+        if(tmp.at(height-1) == NO) full = false;
+    return full;
+}
+
+bool Board::checkWin() const {
 	for(int i = 0; i < width; i++)
 	{
 		for(int j = 0; j < height; j++)
@@ -72,6 +73,37 @@ bool Board::checkWin()
 }
 
 
+bool Board::isTerminal() const {
+    return isFull() || checkWin();
+}
+
+Color Board::getWinner() const {
+    if(checkWin()){
+        int red = 0;
+        int yellow = 0;
+        for( int i = 0; i < width; i++){
+            for(int j = 0; j < height; j++){
+                if(board.at(i).at(j) == RED) red++;
+                if(board.at(i).at(j) == YELLOW) yellow++;
+            }
+        }
+        if(red > yellow) return RED;
+        else return YELLOW;
+    }
+    return NO;
+}
+
+std::vector<int> Board::getLegalMoves() const {
+    std::vector<int> legal_moves;
+    if(checkWin() || isFull()) return legal_moves;
+    for(int i = 0; i < 7; i++) {
+        if(board.at(i).at(Board::height-1) == NO){
+            legal_moves.push_back(i);
+        }
+    }
+    return legal_moves;
+}
+
 
 
 std::ostream& operator<<(std::ostream& os, const Board& obj)
@@ -101,22 +133,6 @@ std::ostream& operator<<(std::ostream& os, const Board& obj)
 	return os;
 }
 
-bool Board::isTerminal() {
-    return isFull() || checkWin();
-}
 
-Color Board::getWinner() {
-    if(checkWin()){
-        int red = 0;
-        int yellow = 0;
-        for( int i = 0; i < width; i++){
-            for(int j = 0; j < height; j++){
-                if(board.at(i).at(j) == RED) red++;
-                if(board.at(i).at(j) == YELLOW) yellow++;
-            }
-        }
-        if(red > yellow) return RED;
-        else return YELLOW;
-    }
-    return NO;
-}
+
+

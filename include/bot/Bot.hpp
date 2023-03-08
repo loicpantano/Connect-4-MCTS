@@ -13,8 +13,9 @@
 class Bot:
         public Player{
 public:
-    void play(Board * board) override;
     explicit Bot(Color color);
+    void play(Board * board) override;
+
 };
 
 

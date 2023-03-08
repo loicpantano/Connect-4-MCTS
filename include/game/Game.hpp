@@ -13,10 +13,9 @@ public:
 	int status;
     int turn;
 
-public:
 	Game(char p1, char p2);
+
 	void start();
-	void playTurn(int i);
 
 };
 

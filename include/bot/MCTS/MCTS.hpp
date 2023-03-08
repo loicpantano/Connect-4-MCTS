@@ -9,12 +9,12 @@
 #include "TreeNode.hpp"
 
 class MCTS {
-public:
+private:
     TreeNode root;
+public:
     explicit MCTS(Board board, Color color);
     void run();
-    int getMove();
-    void printTree();
+    int getMove() const;
 };
 
 

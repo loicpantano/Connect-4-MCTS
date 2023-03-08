@@ -119,13 +119,6 @@ build CMakeFiles/c4.dir/src/game/Board.cpp.obj: CXX_COMPILER__c4_Release C$:/Use
   OBJECT_DIR = CMakeFiles\c4.dir
   OBJECT_FILE_DIR = CMakeFiles\c4.dir\src\game
 
-build CMakeFiles/c4.dir/src/game/Coords.cpp.obj: CXX_COMPILER__c4_Release C$:/Users/loicp/Documents/c4/src/game/Coords.cpp || cmake_object_order_depends_target_c4
-  DEP_FILE = CMakeFiles\c4.dir\src\game\Coords.cpp.obj.d
-  FLAGS = -O3 -DNDEBUG -fdiagnostics-color=always -std=gnu++20
-  INCLUDES = -IC:/SFML/include -IC:/Users/loicp/Documents/c4/include
-  OBJECT_DIR = CMakeFiles\c4.dir
-  OBJECT_FILE_DIR = CMakeFiles\c4.dir\src\game
-
 build CMakeFiles/c4.dir/src/game/Game.cpp.obj: CXX_COMPILER__c4_Release C$:/Users/loicp/Documents/c4/src/game/Game.cpp || cmake_object_order_depends_target_c4
   DEP_FILE = CMakeFiles\c4.dir\src\game\Game.cpp.obj.d
   FLAGS = -O3 -DNDEBUG -fdiagnostics-color=always -std=gnu++20
@@ -141,7 +134,7 @@ build CMakeFiles/c4.dir/src/game/Game.cpp.obj: CXX_COMPILER__c4_Release C$:/User
 #############################################
 # Link the executable c4.exe
 
-build c4.exe: CXX_EXECUTABLE_LINKER__c4_Release CMakeFiles/c4.dir/src/Main.cpp.obj CMakeFiles/c4.dir/src/bot/Bot.cpp.obj CMakeFiles/c4.dir/src/bot/Human.cpp.obj CMakeFiles/c4.dir/src/bot/MCTS/GameState.cpp.obj CMakeFiles/c4.dir/src/bot/MCTS/MCTS.cpp.obj CMakeFiles/c4.dir/src/bot/MCTS/TreeNode.cpp.obj CMakeFiles/c4.dir/src/bot/Player.cpp.obj CMakeFiles/c4.dir/src/bot/PlayerFactory.cpp.obj CMakeFiles/c4.dir/src/engine/Engine.cpp.obj CMakeFiles/c4.dir/src/game/Board.cpp.obj CMakeFiles/c4.dir/src/game/Coords.cpp.obj CMakeFiles/c4.dir/src/game/Game.cpp.obj | C$:/SFML/lib/libsfml-system.a C$:/SFML/lib/libsfml-graphics.a C$:/SFML/lib/libsfml-window.a
+build c4.exe: CXX_EXECUTABLE_LINKER__c4_Release CMakeFiles/c4.dir/src/Main.cpp.obj CMakeFiles/c4.dir/src/bot/Bot.cpp.obj CMakeFiles/c4.dir/src/bot/Human.cpp.obj CMakeFiles/c4.dir/src/bot/MCTS/GameState.cpp.obj CMakeFiles/c4.dir/src/bot/MCTS/MCTS.cpp.obj CMakeFiles/c4.dir/src/bot/MCTS/TreeNode.cpp.obj CMakeFiles/c4.dir/src/bot/Player.cpp.obj CMakeFiles/c4.dir/src/bot/PlayerFactory.cpp.obj CMakeFiles/c4.dir/src/engine/Engine.cpp.obj CMakeFiles/c4.dir/src/game/Board.cpp.obj CMakeFiles/c4.dir/src/game/Game.cpp.obj | C$:/SFML/lib/libsfml-system.a C$:/SFML/lib/libsfml-graphics.a C$:/SFML/lib/libsfml-window.a
   FLAGS = -O3 -DNDEBUG
   LINK_LIBRARIES = C:/SFML/lib/libsfml-system.a  C:/SFML/lib/libsfml-graphics.a  C:/SFML/lib/libsfml-window.a  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\c4.dir

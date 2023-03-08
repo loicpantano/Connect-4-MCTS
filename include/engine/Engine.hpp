@@ -9,11 +9,13 @@
 
 
 class Engine {
-public:
+private:
     sf::RenderWindow window;
     sf::CircleShape boardg[Board::width][Board::height];
     std::unique_ptr<Game> game;
+public:
     explicit Engine(Game * game);
+
     void run();
     void refresh();
     void linkBoard();

@@ -3,9 +3,11 @@
 
 class Player 
 {
-public:
+private:
 	Color color;
-
+public:
 	explicit Player(Color color);
 	virtual void play(Board * board) = 0;
+
+    Color getColor() const;
 };

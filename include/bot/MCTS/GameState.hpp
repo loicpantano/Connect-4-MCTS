@@ -10,17 +10,24 @@
 #include "game/Board.hpp"
 
 class GameState {
-public:
+private:
     Board board;
     Color playerColor;
     Color turnColor;
+
+    GameState(Board board, Color color, Color turnColor);
+
+public:
     GameState();
     explicit GameState(Board board, Color color);
-    GameState(Board board, Color color, Color turnColor);
-    bool isTerminal();
-    Color getWinner();
-    std::vector<int> getLegalMoves();
-    GameState makeMove(int move);
+
+
+    bool isTerminal() const;
+    Color getWinner() const;
+    std::vector<int> getLegalMoves() const;
+    GameState makeMove(int move) const;
+
+    Color getPlayerColor() const;
 };
 
 
