@@ -17,6 +17,7 @@ include_directories(include)
 # Add the executable and link the SFML libraries
 add_executable(${PROJECT_NAME} ${SOURCES})
 
-# link the SFML libraries to your executable
-target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-audio)
 
+add_subdirectory(lib/SFML)
+include_directories(lib/SFML/include)
+target_link_libraries(${PROJECT_NAME} sfml-graphics sfml-audio)
