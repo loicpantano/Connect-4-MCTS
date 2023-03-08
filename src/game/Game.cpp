@@ -12,7 +12,7 @@ Game::Game(char p1, char p2) : board(Board()), status(0), turn(0) {
 }
 
 void Game::start() {
-    Engine engine = Engine(this);
+    Engine engine{this};
     status = 1;
     board.reset();
 

@@ -5,6 +5,7 @@
 #include <cmath>
 #include <iostream>
 #include "bot/MCTS/TreeNode.hpp"
+#include <limits>
 
 //Constructors
 TreeNode::TreeNode(GameState gameState) : gameState(gameState), move(-1) {
