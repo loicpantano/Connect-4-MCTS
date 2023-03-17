@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.17)
+cmake_minimum_required(VERSION 3.16)
 project(connect4_mcts)
 
 set(CMAKE_CXX_STANDARD 20)
@@ -19,5 +19,4 @@ add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
         $<TARGET_FILE:sfml-system>
         $<TARGET_FILE:sfml-window>
         $<TARGET_FILE:sfml-graphics>
-        $<TARGET_FILE:sfml-audio>
         $<TARGET_FILE_DIR:${PROJECT_NAME}>)
