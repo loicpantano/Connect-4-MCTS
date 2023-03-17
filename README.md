@@ -1,6 +1,9 @@
 # 🔴🟡Connect-4 Game
 This is a simple Connect-4 game implemented in C++. In this game, you can play against a bot that uses the Monte Carlo Tree Search (MCTS) algorithm to make its moves.
 
+## 🎬 Preview
+![demo](https://i.imgur.com/HfkTst2.png)
+
 ## 🔌Download
 To Download the project on windows/Ubuntu you first need to clone the repository with 
 ```
